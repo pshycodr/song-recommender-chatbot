@@ -12,27 +12,6 @@ An AI-powered chatbot that suggests songs based on user input. The backend is bu
 
 ---
 
-## 🗂️ **Project Structure**
-```
-├── backend/
-│   ├── main.py (FastAPI server code)
-│   ├── config.py (Holds API key configuration)
-│   └── prompt.txt (Customizable prompt file)
-│   └── requirment.txt (Customizable prompt file)
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── ChatBox.tsx
-│   │   │   ├── ChatBubble.tsx
-│   │   │   └── SongSuggestions.tsx
-│   │   └── App.tsx
-│   └── package.json
-├── .gitignore
-└── README.md
-```
-
----
-
 ## ⚡ **Backend Setup (Python FastAPI)**
 
 ### 1️⃣ **Clone the Repository**
