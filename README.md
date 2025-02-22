@@ -62,7 +62,7 @@ API_KEY="your_google_generative_ai_api_key_here"
 ```
 ### 3️⃣ **Start the Backend**
 ```bash
-uvicorn app:app --reload
+uvicorn main:app --reload
 ```
 - The app will be available at `http://127.0.0.1:8000`.
 
