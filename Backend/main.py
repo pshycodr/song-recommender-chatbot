@@ -15,10 +15,10 @@ app = FastAPI(title="Gemini-Pro Chatbot API", version="1.0")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],  # React dev server URL
+    allow_origins=["http://localhost:5173"],  # Frontend app URL
     allow_credentials=True,
-    allow_methods=["*"],  # Allow all HTTP methods
-    allow_headers=["*"],  # Allow all headers
+    allow_methods=["*"],  
+    allow_headers=["*"], 
 )
 
 class MessageRequest(BaseModel):
