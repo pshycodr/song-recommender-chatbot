@@ -1,26 +1,29 @@
-import React from "react";
+import React from 'react'
+import ChatBubbleProps from '../types/ChatBubbleProps.types'
+import SongList from './SongList'
 
-interface ChatBubbleProps {
-  message: string;
-  sender: "user" | "bot";
+
+const ChatBubble: React.FC<ChatBubbleProps> = ({ bot, message, songs }: ChatBubbleProps) => {
+  console.log("FROM CHATBUBBLE ==>> ", songs)
+  return (
+    <>
+      {bot ? (<div className='flex justify-start'>
+        <div >
+          <div className='bg-gray-300 p-2 rounded-lg m-2 text-wrap:wrap'>
+          {message}
+          </div>
+          <SongList songs={songs || []} />
+        </div>
+      </div>)
+        :
+        (<div className='flex justify-end  '>
+          <div className='bg-blue-300 p-2 rounded-lg m-2 text-wrap:wrap'>
+            {message}
+          </div>
+        </div>)
+      }
+    </>
+  )
 }
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ message, sender }) => {
-  const isUser = sender === "user";
-
-  return (
-    <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-4 text-wrap h-auto`}>
-      <div
-        className={`text-wrap h-auto max-w-xs md:max-w-md px-4 py-2 rounded-lg shadow ${
-          isUser
-            ? "bg-blue-500 text-white rounded-br-none"
-            : "bg-gray-200 text-gray-900 rounded-bl-none"
-        }`}
-      >
-        <p className="text-sm">{message}</p>
-      </div>
-    </div>
-  );
-};
-
-export default ChatBubble;
+export default ChatBubble
