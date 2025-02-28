@@ -45,8 +45,15 @@ INSTALLED_APPS = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'http://localhost:5173',
+    "http://localhost:5173",  # Allow frontend
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",  # Allow frontend for CSRF check
+]
+CORS_ALLOW_CREDENTIALS = True
+SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'None' if using HTTPS
+SESSION_COOKIE_SECURE = False    # True if using HTTPS
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',

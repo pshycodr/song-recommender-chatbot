@@ -63,6 +63,11 @@ def hello_world(request, format=None):
     return redirect('http://localhost:5173/chat')
 
 
+from django.http import JsonResponse
+from django.middleware.csrf import get_token
+
+def csrf_token_view(request):
+    return JsonResponse({'csrfToken': get_token(request)})
 
 # @api_view(['GET'])
 # def auth_check(request):

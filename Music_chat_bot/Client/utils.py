@@ -33,11 +33,9 @@ async def gemini_response(query):
         return {"error": f"Failed to get response from Gemini: {str(e)}"}
 
 
-def get_access_token():
+def get_access_token(session_id):
     
     try:
-        # session_id = request.session.session_key
-        session_id = 'qh11mtw7c70f23r8vz4kpzoy47bmcvut'
 
         
         if not session_id:
@@ -56,9 +54,9 @@ def get_access_token():
         return {"error": f"Failed to get access token: {str(e)}"}
 
 
-def search_song(query, limit=10):
+def search_song(session_id, query, limit=10):
     try:
-        access_token = get_access_token()
+        access_token = get_access_token(session_id)
         sp = spotipy.Spotify(auth=access_token)
         results = sp.search(q=query, limit=limit, type="track")
         data = [{"name": track["name"], "artist": track["artists"][0]["name"], "id": track["id"]}

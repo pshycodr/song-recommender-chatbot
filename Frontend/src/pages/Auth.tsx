@@ -1,9 +1,13 @@
 
 import React from 'react'
+import AuthPage from '../components/AuthPage'
 
 const Auth: React.FC = () => {
   return (
-    <h1>This is Auth page</h1>
+    <>
+      <AuthPage />
+
+    </>
   )
 }
 
