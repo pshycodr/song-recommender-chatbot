@@ -68,11 +68,11 @@ def search_song(session_id, query, limit=10):
 
 def create_album(**kwargs):
     try:
-        access_token = get_access_token()
+        access_token = get_access_token(kwargs['session_id'])
         sp = spotipy.Spotify(auth=access_token)
         user_id = sp.me()["id"]
         query = f"{kwargs['album_artist']} {kwargs['album_genre']} {kwargs['album_name']}"
-        songs = search_song(query, kwargs['number_of_songs'])
+        songs = search_song(kwargs['session_id'], query, kwargs['number_of_songs'])
         song_ids = [song['id'] for song in songs]
         
         playlist = sp.user_playlist_create(user_id, kwargs['album_name'], public=True)

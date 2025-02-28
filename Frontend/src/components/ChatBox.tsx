@@ -14,7 +14,7 @@ const ChatBox: React.FC = () => {
     <div className="relative min-h-screen flex justify-center items-center overflow-hidden bg-black ">
       <div className="absolute inset-0 w-full h-full">
         <img
-          src="/assets/chat-bg.png"
+          src="/assets/chat-bg.jpg"
           alt="Chat Background"
           className="w-full h-full object-cover blur-md"
         />
@@ -23,18 +23,17 @@ const ChatBox: React.FC = () => {
 
       <div className="relative z-10  w-full max-w-4xl h-[90vh] flex flex-col items-center justify-between bg-spotify-dark bg-opacity-20 backdrop-blur-lg  rounded-lg shadow-2xl overflow-hidden ">
         <div className="w-full h-full p-6 overflow-y-auto scrollbar-thin scrollbar-thumb-spotify-green scrollbar-track-spotify-dark">
-          {loading ? (
-            <Loading />
-          ) : (
-            messages.map((message, index) => (
+          { messages.map((message, index) => (
               <ChatBubble
                 bot={message.bot}
                 message={message.message}
                 key={index}
                 songs={message.songs}
+                playlist_link={message.playlist_link}
               />
-            ))
-          )}
+            ))}
+            {loading && <Loading />}
+
         </div>
 
         <div className="w-full p-4 bg-spotify-dark  border-t border-spotify-green">

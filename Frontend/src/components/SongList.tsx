@@ -4,7 +4,7 @@ import SongProps from '../types/SongProps.types';
 const SongList: React.FC<{ songs: SongProps[] }> = ({ songs }) => {
   return (
     <div>
-      {songs.length ? (
+      {songs && (
         <div className="bg-spotify-green bg-opacity-20 p-4 rounded-lg m-2 text-wrap:wrap border border-spotify-green">
           <ol>
             {songs.map((song, index) => (
@@ -17,7 +17,7 @@ const SongList: React.FC<{ songs: SongProps[] }> = ({ songs }) => {
             ))}
           </ol>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };

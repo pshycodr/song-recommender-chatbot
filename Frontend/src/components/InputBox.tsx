@@ -21,12 +21,20 @@ const InputBox: React.FC = () => {
         { withCredentials: true }
       );
 
+      console.log(response.data);
+      
+
       if (response.data['search_song']) {
         setChat((prevChat) => [
           ...prevChat,
           { bot: true, message: response.data.message, songs: response.data.songs },
         ]);
-      } else {
+      }else if(response.data['create_album']){
+        setChat((prevChat) => [
+          ...prevChat,
+          { bot: true, message: response.data.message, songs: response.data.songs, playlist_link: response.data.playlist.playlist_link },
+        ]);
+      }else {
         setChat((prevChat) => [
           ...prevChat,
           { bot: true, message: response.data.message },

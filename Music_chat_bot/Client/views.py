@@ -27,14 +27,14 @@ def user_query(request):
         # Convert async function call to sync
         response = async_to_sync(gemini_response)(request)
         
-        # print("RESPONSE === >>",  type(response), response)
+        print("RESPONSE === >>",  type(response), response)
         # print("RESPONSE DATA === >>", response.get('search_song'), response.get('search_song_query'))   
         # print("Session-key out ====>> " , request.session.session_key)
 
+        session_id = request.session.session_key
         if response.get('search_song'): 
             # print("INSIDE IF 1")
             query = response.get('search_song_query')
-            session_id = request.session.session_key
             # print("INSIDE ===> ", session_id)
             # print("QUERY === >>", query)
             songs = search_song(session_id ,query)
@@ -51,11 +51,13 @@ def user_query(request):
             playlist = create_album(album_name=album_query['album_name'],
                                     album_genre=album_query['album_genre'],
                                     album_artist=album_query['album_artist'],
-                                    number_of_songs=album_query['number_of_songs'])
-            
+                                    number_of_songs=album_query['number_of_songs'],
+                                    session_id=session_id)
+            print(playlist)
             return Response({
+                'message' : response.get('message'),
                 'playlist': playlist,
-                'create_album': True
+                'create_album': True    
             })
 
         return Response(response)
