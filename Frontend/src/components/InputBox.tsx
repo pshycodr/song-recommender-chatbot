@@ -24,7 +24,12 @@ const InputBox: React.FC = () => {
       console.log(response.data);
       
 
-      if (response.data['search_song']) {
+      if(response.data['error']){
+        setChat((prevChat) => [
+          ...prevChat,
+          { bot: true, message: response.data.message, songs: response.data.songs, pageLink: 'http://localhost:5173/auth', text: "Signin Here"},
+        ]);
+      }else if (response.data['search_song']) {
         setChat((prevChat) => [
           ...prevChat,
           { bot: true, message: response.data.message, songs: response.data.songs },
@@ -32,7 +37,7 @@ const InputBox: React.FC = () => {
       }else if(response.data['create_album']){
         setChat((prevChat) => [
           ...prevChat,
-          { bot: true, message: response.data.message, songs: response.data.songs, playlist_link: response.data.playlist.playlist_link },
+          { bot: true, message: response.data.message, songs: response.data.songs, pageLink: response.data.playlist.playlist_link, text: "🎵 Open Playlist on Spotify" },
         ]);
       }else {
         setChat((prevChat) => [

@@ -29,7 +29,8 @@ const ChatBox: React.FC = () => {
                 message={message.message}
                 key={index}
                 songs={message.songs}
-                playlist_link={message.playlist_link}
+                pageLink={message.pageLink}
+                text={message.text}
               />
             ))}
             {loading && <Loading />}

@@ -1,9 +1,9 @@
 import React from 'react';
 import ChatBubbleProps from '../types/ChatBubbleProps.types';
 import SongList from './SongList';
-import PlaylistLink from './PlaylistLink';
+import PageLink from './PageLink';
 
-const ChatBubble: React.FC<ChatBubbleProps> = ({ bot, message, songs, playlist_link }) => {
+const ChatBubble: React.FC<ChatBubbleProps> = ({ bot, message, songs, pageLink, text }) => {
   return (
     <>
       {bot ? (
@@ -15,7 +15,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ bot, message, songs, playlist_l
 
             {songs && <SongList songs={songs} />}
 
-            {playlist_link && <PlaylistLink playlist_link={playlist_link} />}
+            {pageLink && <PageLink pageLink={pageLink}  text={text || ""} />}
 
           </div>
         </div>

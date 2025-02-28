@@ -38,7 +38,11 @@ def user_query(request):
             # print("INSIDE ===> ", session_id)
             # print("QUERY === >>", query)
             songs = search_song(session_id ,query)
-            # print("SONGS === >>", type(songs))
+            print(songs)
+            print("SONGS === >>", type(songs), songs)
+            if isinstance(songs, dict) and songs.get('error'):
+                return Response({'message': 'You are not authorized, Please login', 'error': True})
+
             return  Response({
                             "songs": songs,
                             "message": response.get('message'),
@@ -53,6 +57,10 @@ def user_query(request):
                                     album_artist=album_query['album_artist'],
                                     number_of_songs=album_query['number_of_songs'],
                                     session_id=session_id)
+            
+            if isinstance(playlist, dict) and playlist.get('error'):
+                return Response({'message': 'You are not authorized, Please login', 'error': True})
+                
             print(playlist)
             return Response({
                 'message' : response.get('message'),

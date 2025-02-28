@@ -4,5 +4,6 @@ export default interface ChatAtomProps {
     bot : Boolean;
     message : String;
     songs? : SongProps[];
-    playlist_link? : string;
+    pageLink? : string;
+    text? : string;
 }
