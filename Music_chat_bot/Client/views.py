@@ -22,24 +22,15 @@ def user_query(request):
         if not request.data.get("message"):
             return Response({"error": "No query provided"}, status=400)
         
-        # print("REQUEST === >>", request.data)
         
         # Convert async function call to sync
         response = async_to_sync(gemini_response)(request)
         
-        print("RESPONSE === >>",  type(response), response)
-        # print("RESPONSE DATA === >>", response.get('search_song'), response.get('search_song_query'))   
-        # print("Session-key out ====>> " , request.session.session_key)
 
         session_id = request.session.session_key
         if response.get('search_song'): 
-            # print("INSIDE IF 1")
             query = response.get('search_song_query')
-            # print("INSIDE ===> ", session_id)
-            # print("QUERY === >>", query)
             songs = search_song(session_id ,query)
-            print(songs)
-            print("SONGS === >>", type(songs), songs)
             if isinstance(songs, dict) and songs.get('error'):
                 return Response({'message': 'You are not authorized, Please login', 'error': True})
 
@@ -50,7 +41,6 @@ def user_query(request):
                         })
         
         if response.get('create_album'):
-            # print(response.get('create_album_query'))
             album_query = response.get('create_album_query')
             playlist = create_album(album_name=album_query['album_name'],
                                     album_genre=album_query['album_genre'],
@@ -60,8 +50,7 @@ def user_query(request):
             
             if isinstance(playlist, dict) and playlist.get('error'):
                 return Response({'message': 'You are not authorized, Please login', 'error': True})
-                
-            print(playlist)
+
             return Response({
                 'message' : response.get('message'),
                 'playlist': playlist,

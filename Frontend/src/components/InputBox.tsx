@@ -21,7 +21,7 @@ const InputBox: React.FC = () => {
         { withCredentials: true }
       );
 
-      console.log(response.data);
+      // console.log(response.data);
       
 
       if(response.data['error']){

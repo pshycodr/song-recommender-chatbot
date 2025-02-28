@@ -7,7 +7,7 @@ const SpotifyLoginButton: React.FC = () => {
         try {
             const response = await axios.get('http://127.0.0.1:3000/auth_check/')
             const url = response.data.url
-            console.log(url);
+            // console.log(url);
 
             window.location.replace(url)
         } catch (error) {
