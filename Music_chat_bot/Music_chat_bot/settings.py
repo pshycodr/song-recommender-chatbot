@@ -44,16 +44,16 @@ INSTALLED_APPS = [
     'Client',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:5173",  # Allow frontend
-]
+import os
 
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:5173",  # Allow frontend for CSRF check
-]
-CORS_ALLOW_CREDENTIALS = True
-SESSION_COOKIE_SAMESITE = 'Lax'  # Or 'None' if using HTTPS
-SESSION_COOKIE_SECURE = False    # True if using HTTPS
+load_dotenv()
+
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost").split(",")
+CSRF_TRUSTED_ORIGINS = os.getenv("CSRF_TRUSTED_ORIGINS", "").split(",")
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "").split(",")
+
+SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SECURE = True 
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
