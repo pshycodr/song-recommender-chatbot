@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useSetRecoilState } from 'recoil';
 import { chatAtom } from '../store/atom/chatAtom';
 import { LoadingAtom } from '../store/atom/LoadingAtom';
-import { BACKEND_URL } from '../config';
+// import { BACKEND_URL } from '../config';
 
 const InputBox: React.FC = () => {
   const [message, setMessage] = useState('');
@@ -25,7 +25,7 @@ const InputBox: React.FC = () => {
 
     try {
       const response = await axios.post(
-        `${BACKEND_URL}/api/client/user-query/`,
+        `https://song-recommender-chatbot.onrender.com/api/client/user-query/`,
         { message },
         { withCredentials: true }
       );
