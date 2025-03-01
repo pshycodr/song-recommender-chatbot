@@ -21,7 +21,7 @@ const ChatBubble: React.FC<ChatBubbleProps> = ({ bot, message, songs, pageLink, 
         </div>
       ) : (
         <div className="flex justify-end">
-          <div className="bg-spotify-light p-3 rounded-lg m-2 text-wrap:wrap text-spotify-dark">
+          <div className="bg-spotify-light font-semibold p-3 rounded-lg m-2 text-wrap:wrap text-spotify-dark">
             {message}
           </div>
         </div>
