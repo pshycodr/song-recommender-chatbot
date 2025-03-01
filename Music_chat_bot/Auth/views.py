@@ -68,39 +68,3 @@ from django.middleware.csrf import get_token
 
 def csrf_token_view(request):
     return JsonResponse({'csrfToken': get_token(request)})
-
-# @api_view(['GET'])
-# def auth_check(request):
-#     try:
-#         sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
-#             client_id=SPOTIFY_CLIENT_ID,
-#             client_secret=SPOTIFY_CLIENT_SECRET,
-#             redirect_uri=SPOTIFY_REDIRECT_URI,
-#             scope="user-top-read user-read-private user-read-email user-library-read playlist-modify-public playlist-modify-private"
-#         ))
-        
-#         user = sp.current_user()
-                
-#         return Response({'message': 'You successfully signed in! FROM AUTH SIDE'}, status=200)
-#     except Exception as e:
-#         raise RuntimeError(f"Failed to initialize Spotify client: {str(e)}")
-
-
-# @api_view(['GET'])
-# def hello_world(request):
-#     try:
-#         sp_oauth = SpotifyOAuth(
-#             client_id=SPOTIFY_CLIENT_ID,
-#             client_secret=SPOTIFY_CLIENT_SECRET,
-#             redirect_uri=SPOTIFY_REDIRECT_URI,
-#             scope="user-top-read user-read-private user-read-email user-library-read playlist-modify-public playlist-modify-private"
-#         )
-#         code = request.GET.get('code')  # Fixed for GET request
-#         if not code:
-#             return Response({"error": "Authorization code is missing."}, status=status.HTTP_400_BAD_REQUEST)
-
-#         session_token_info = sp_oauth.get_access_token(code, as_dict=True)
-#         print("CODE ---->>>>>>> ", session_token_info)
-#         return Response({"message": "Spotify authentication successful!", "token_info": session_token_info})
-#     except Exception as e:
-#         return Response({"error": f"Authentication failed: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)

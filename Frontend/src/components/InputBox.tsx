@@ -13,7 +13,7 @@ const InputBox: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     setDisableButton(true)
-
+    setMessage('');
     if (message === '') {
       setDisableButton(false)
       return alert('Please enter a message')
@@ -29,7 +29,7 @@ const InputBox: React.FC = () => {
         { withCredentials: true }
       );
 
-      // console.log(response.data);
+      console.log(response.data);
 
 
       if (response.data['error']) {
@@ -54,7 +54,7 @@ const InputBox: React.FC = () => {
         ]);
       }
 
-      setMessage('');
+
       setDisableButton(false)
       setLoading(false);
     } catch (error) {
@@ -69,14 +69,14 @@ const InputBox: React.FC = () => {
         <div className="flex justify-center w-full">
           <input
             type="text"
-            className="w-full p-3 mx-2 rounded-lg bg-spotify-light text-spotify-dark placeholder-spotify-dark"
+            className="w-full p-3 mx-2 rounded-lg font-semibold bg-spotify-light text-spotify-dark placeholder-spotify-dark"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             placeholder="Type your message..."
           />
           <button
             type="submit"
-            className={` p-3 rounded-lg mx-2 bg-spotify-green text-spotify-dark hover:bg-spotify-light transition-all ${disableButton ? "cursor-not-allowed" : "cursor-pointer" }  `}
+            className={` p-3 rounded-lg mx-2 bg-spotify-green text-spotify-dark hover:bg-spotify-light transition-all ${disableButton ? "cursor-not-allowed opacity-50" : "cursor-pointer"}  `}
             disabled={disableButton}
           >
             Send

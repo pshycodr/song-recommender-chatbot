@@ -40,8 +40,6 @@ def get_access_token(session_id):
         if not session_id:
             return ({"error": "No active session found"})
         
-        if not is_spotify_authenticated(session_id): 
-            return ({"error": "User is not authenticated"})
         
         user_tokens = get_user_tokens(session_id)
         
@@ -60,9 +58,6 @@ def search_song(session_id, query, limit=10):
     try:
         access_token = get_access_token(session_id)
 
-        if isinstance(access_token, dict) and access_token.get('error'):
-            return {"error": "No access token found"}
-
         sp = spotipy.Spotify(auth=access_token)
         results = sp.search(q=query, limit=limit, type="track")
         data = [{"name": track["name"], "artist": track["artists"][0]["name"], "id": track["id"]}
@@ -75,9 +70,6 @@ def search_song(session_id, query, limit=10):
 def create_album(**kwargs):
     try:
         access_token = get_access_token(kwargs['session_id'])
-
-        if isinstance(access_token, dict) and access_token.get('error'):
-            return {"error": "No access token found"}
 
         sp = spotipy.Spotify(auth=access_token)
         user_id = sp.me()["id"]

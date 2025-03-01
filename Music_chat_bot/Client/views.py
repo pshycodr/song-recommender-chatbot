@@ -22,17 +22,19 @@ def user_query(request):
         if not request.data.get("message"):
             return Response({"error": "No query provided"}, status=400)
         
-        
+        session_id = request.session.session_key
+
+        if not is_spotify_authenticated(session_id): 
+            return Response({'message': 'You are not authorized, Please login', 'error': True})
+
+        print("YOU BUSTED")
         # Convert async function call to sync
         response = async_to_sync(gemini_response)(request)
         
 
-        session_id = request.session.session_key
         if response.get('search_song'): 
             query = response.get('search_song_query')
             songs = search_song(session_id ,query)
-            if isinstance(songs, dict) and songs.get('error'):
-                return Response({'message': 'You are not authorized, Please login', 'error': True})
 
             return  Response({
                             "songs": songs,
@@ -47,9 +49,6 @@ def user_query(request):
                                     album_artist=album_query['album_artist'],
                                     number_of_songs=album_query['number_of_songs'],
                                     session_id=session_id)
-            
-            if isinstance(playlist, dict) and playlist.get('error'):
-                return Response({'message': 'You are not authorized, Please login', 'error': True})
 
             return Response({
                 'message' : response.get('message'),
